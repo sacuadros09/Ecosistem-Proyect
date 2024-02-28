@@ -14,6 +14,12 @@ app.get('/', (req,res) => {
     res.send("Hello Word")
 })
 
+app.get('/users', (req,res) => {
+   console.log("Query:",req.query)
+   console.log("Headers:",req.headers)
+    res.send({id})
+})
+
 app.get('/users/:id', (req,res) => {
     const id = req.params.id
     res.send({id})
