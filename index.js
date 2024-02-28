@@ -7,9 +7,16 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+const users = []
+
 
 app.get('/', (req,res) => {
     res.send("Hello Word")
+})
+
+app.get('/users/:id', (req,res) => {
+    const id = req.params.id
+    res.send({id})
 })
 
 
