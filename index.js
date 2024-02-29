@@ -1,17 +1,20 @@
 const express  = require("express")
 const cors = require ("cors")
 const z = require("zod")
+const path = require("path");
 
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
+
+
 const users = []
 
 
 app.get('/', (req,res) => {
-    res.send("Hello Word")
+ res.sendFile(path.join(__dirname, 'index.html'));
 })
 
 app.get('/users', (req,res) => {
@@ -87,10 +90,6 @@ app.post('/register', (req, res) => {
 
     res.send({ user: newUser });
 }); 
-
-
-
-
 
 
 
