@@ -63,6 +63,39 @@ sanitizedTask.password = "********";
 res.send({ task: sanitizedTask });
 });
 
+
+app.post('/register', (req, res) => {
+    const registerSchema = z.object({
+        name: z.string(),
+        last: z.string(),
+        email: z.string().email(),
+        code: z.union([z.string(), z.number()]),
+        password: z.string()
+    });
+
+    const registerValidation = registerSchema.safeParse(req.body);
+
+    if (!registerValidation.success) {
+        return res.status(400).send({ error: "Invalid data", details: registerValidation.error });
+    }
+
+    const newUser = { ...registerValidation.data };
+    newUser.password = "********";
+
+    // Almacenar en el array de usuarios
+    users.push(newUser);
+
+    res.send({ user: newUser });
+}); 
+
+
+
+
+
+
+
 app.listen(3000,() => {
     console.log("Server is running on port 3000")
 })
+
+
